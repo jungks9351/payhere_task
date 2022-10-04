@@ -7,3 +7,4 @@
 - Framework : React
 - language : TypeScript
 - Style : Styled-components
+- Formatting : Eslint, Prettier
