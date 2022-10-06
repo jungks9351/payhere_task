@@ -1,8 +1,10 @@
-import CustomButton from 'component/common/CustomButton'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import CustomButton from 'component/common/CustomButton'
+
 export type RepoItmeType = {
+  id: number
   full_name: string
   owner: {
     avatar_url: string
@@ -12,15 +14,61 @@ export type RepoItmeType = {
 }
 
 export type BookmarkType = {
-  active: boolean
+  isBookmark: boolean
 }
 
 const RepoItem = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
-  const [active, setActive] = useState<boolean>(false)
+  const [isBookmark, setIsBookmark] = useState(false)
 
   const handleBookmark = () => {
-    setActive(!active)
+    const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
+
+    if (bookmarks.length === 4 && !isBookmark) {
+      alert('북마크는 4개까지만 가능합니다.')
+      return
+    }
+
+    if (!isBookmark) {
+      setIsBookmark(!isBookmark)
+    } else {
+      const remove = bookmarks.filter(
+        (bookmark: RepoItmeType) => bookmark.id !== repoItemData.id,
+      )
+      localStorage.setItem('bookmarks', JSON.stringify(remove))
+      setIsBookmark(!isBookmark)
+      return
+    }
+
+    bookmarks.map((bookmark: RepoItmeType) => {
+      if (bookmark.id === repoItemData.id) setIsBookmark(true)
+    })
+
+    if (isBookmark) return
+
+    const payload = {
+      id: repoItemData.id,
+      full_name: repoItemData.full_name,
+      owner: {
+        avatar_url: repoItemData.owner.avatar_url,
+      },
+      description: repoItemData.description,
+      html_url: repoItemData.html_url,
+    }
+
+    bookmarks.push(payload)
+
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
   }
+
+  useEffect(() => {
+    const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
+    bookmarks.map((bookmark: RepoItmeType) => {
+      if (bookmark.id === repoItemData.id) {
+        setIsBookmark(true)
+      }
+    })
+  }, [repoItemData.id])
+
   return (
     <RepoItemWrapper>
       <OwnerWrapper>
@@ -31,7 +79,7 @@ const RepoItem = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
       </OwnerWrapper>
 
       <RepoDescription>{repoItemData.description}</RepoDescription>
-      <ButtonWrapper active={active}>
+      <ButtonWrapper isBookmark={isBookmark}>
         <CustomButton
           onClick={handleBookmark}
           type="button"
@@ -92,8 +140,8 @@ const OwnerAvatar = styled.img`
 
 const ButtonWrapper = styled.div<BookmarkType>`
   padding: 10px 0;
-  ${({ active }) =>
-    active &&
+  ${({ isBookmark }) =>
+    isBookmark &&
     css`
       button {
         color: yellow;
