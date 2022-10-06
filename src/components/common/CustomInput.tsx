@@ -1,6 +1,8 @@
+import { ChangeEventHandler } from 'react'
 import styled from 'styled-components'
 
 interface CustomInputProps {
+  onChange: ChangeEventHandler
   id?: string
   type: string
   autoComplete: string
@@ -11,6 +13,7 @@ interface CustomInputProps {
 }
 
 const CustomInput = ({
+  onChange,
   id,
   type,
   autoComplete,
@@ -21,6 +24,7 @@ const CustomInput = ({
 }: CustomInputProps) => {
   return (
     <StyledInput
+      onChange={onChange}
       id={id}
       type={type}
       autoComplete={autoComplete}
