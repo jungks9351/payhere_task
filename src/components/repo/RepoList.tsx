@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import RepoItem, { RepoItmeType } from 'component/repo/RepoItem'
+import styled from 'styled-components'
 
 const RepoList = () => {
   const [searchParams] = useSearchParams()
-  const [repoListData, setRepoListData] = useState([])
+  const [repoListData, setRepoListData] = useState<RepoItmeType[]>([])
 
   useEffect(() => {
     const fetchRepoList = async () => {
@@ -11,7 +13,7 @@ const RepoList = () => {
       const token = process.env.REACT_APP_GITHUB_TOKEN
 
       const res = await fetch(
-        `https://api.github.com/search/repositories?q=${q}&sort=starts&order=desc&page=1`,
+        `https://api.github.com/search/repositories?q=${q}&sort=starts&order=desc&per_page=10&page=1`,
         {
           method: 'GET',
           headers: {
@@ -26,13 +28,17 @@ const RepoList = () => {
   }, [searchParams])
 
   return (
-    <ul>
+    <RespoListWrapper>
       {repoListData &&
-        repoListData.map((repoItemData: { name: string }, idx: number) => (
-          <li key={idx}>{repoItemData.name}</li>
+        repoListData.map((repoItemData, idx) => (
+          <RepoItem key={idx} repoItemData={repoItemData} />
         ))}
-    </ul>
+    </RespoListWrapper>
   )
 }
+
+const RespoListWrapper = styled.ul`
+  padding: 0 5vw;
+`
 
 export default RepoList
