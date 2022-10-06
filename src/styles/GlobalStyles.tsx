@@ -43,6 +43,10 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     background-color: inherit;
   }
+
+  ul {
+    list-style: none;
+  }
 `
 
 export default GlobalStyles
