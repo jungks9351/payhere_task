@@ -25,9 +25,8 @@ const RepoItem = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
   )
 }
 
-const RepoItemWrapper = styled.li`
+const RepoItemWrapper = styled.div`
   padding: 10px 16px;
-  border-bottom: 1px solid #d0d7de;
 
   display: flex;
   flex-direction: column;

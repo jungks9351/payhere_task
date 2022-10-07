@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import RepoItem, { RepoItmeType } from 'component/repo/RepoItem'
+import RepoItem from 'component/repo/RepoItem'
 import styled from 'styled-components'
+import { RepoItmeType } from 'src/type'
 
 const RepoList = () => {
   const [searchParams] = useSearchParams()
@@ -31,7 +32,9 @@ const RepoList = () => {
     <RespoListWrapper>
       {repoListData &&
         repoListData.map((repoItemData, idx) => (
-          <RepoItem key={idx} repoItemData={repoItemData} />
+          <RepoItemWrapper key={idx}>
+            <RepoItem repoItemData={repoItemData} />
+          </RepoItemWrapper>
         ))}
     </RespoListWrapper>
   )
@@ -39,6 +42,10 @@ const RepoList = () => {
 
 const RespoListWrapper = styled.ul`
   padding: 0 5vw;
+`
+
+const RepoItemWrapper = styled.li`
+  border-bottom: 1px solid #d0d7de;
 `
 
 export default RepoList
