@@ -4,16 +4,7 @@ import RepoName from 'component/repo/RepoName'
 import RepoDescription from 'component/repo/RepoDescription'
 import RepoOwnerAvatar from 'component/repo/RepoOwnerAvatar'
 import BookmarkButton from 'component/repo/BookmarkButton'
-
-export type RepoItmeType = {
-  id: number
-  full_name: string
-  owner: {
-    avatar_url: string
-  }
-  description: string
-  html_url: string
-}
+import { RepoItmeType } from 'src/type'
 
 export type BookmarkType = {
   isBookmark: boolean
@@ -24,9 +15,9 @@ const RepoItem = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
     <RepoItemWrapper>
       <InfoWrapper>
         <RepoOwnerAvatar src={repoItemData.owner.avatar_url} />
-        <a href={repoItemData.html_url} target="_blank" rel="noreferrer">
-          <RepoName>{repoItemData.full_name}</RepoName>
-        </a>
+        <RepoName url={repoItemData.html_url}>
+          {repoItemData.full_name}
+        </RepoName>
       </InfoWrapper>
       <RepoDescription>{repoItemData.description}</RepoDescription>
       <BookmarkButton repoItemData={repoItemData} />
