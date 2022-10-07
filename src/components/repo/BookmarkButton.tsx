@@ -1,4 +1,5 @@
 import CustomButton from 'component/common/CustomButton'
+
 import { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 
@@ -19,22 +20,11 @@ export type BookmarkType = {
 const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
   const [isBookmark, setIsBookmark] = useState(false)
 
-  const handleBookmark = () => {
+  const addBookmark = () => {
     const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
 
     if (bookmarks.length === 4 && !isBookmark) {
       alert('북마크는 4개까지만 가능합니다.')
-      return
-    }
-
-    if (!isBookmark) {
-      setIsBookmark(!isBookmark)
-    } else {
-      const remove = bookmarks.filter(
-        (bookmark: RepoItmeType) => bookmark.id !== repoItemData.id,
-      )
-      localStorage.setItem('bookmarks', JSON.stringify(remove))
-      setIsBookmark(!isBookmark)
       return
     }
 
@@ -54,9 +44,20 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
       html_url: repoItemData.html_url,
     }
 
-    bookmarks.push(payload)
+    setIsBookmark(true)
 
+    bookmarks.push(payload)
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
+  }
+
+  const removeBookmark = () => {
+    const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
+
+    const newBookmarks = bookmarks.filter(
+      (bookmark: RepoItmeType) => bookmark.id !== repoItemData.id,
+    )
+    localStorage.setItem('bookmarks', JSON.stringify(newBookmarks))
+    setIsBookmark(false)
   }
 
   useEffect(() => {
@@ -71,7 +72,7 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
   return (
     <ButtonWrapper isBookmark={isBookmark}>
       <CustomButton
-        onClick={handleBookmark}
+        onClick={!isBookmark ? addBookmark : removeBookmark}
         type="button"
         title="bookmark button"
         fontSize={14}
