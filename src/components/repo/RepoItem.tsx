@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import RepoName from 'component/repo/RepoName'
 import RepoDescription from 'component/repo/RepoDescription'
