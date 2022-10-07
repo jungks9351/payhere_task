@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import CustomButton from 'component/common/CustomButton'
+import RepoName from 'component/repo/RepoName'
+import RepoDescription from 'component/repo/RepoDescription'
+import RepoOwnerAvatar from 'component/repo/RepoOwnerAvatar'
 
 export type RepoItmeType = {
   id: number
@@ -71,13 +74,12 @@ const RepoItem = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
 
   return (
     <RepoItemWrapper>
-      <OwnerWrapper>
-        <OwnerAvatar src={repoItemData.owner.avatar_url} alt="Owner Avatar" />
+      <InfoWrapper>
+        <RepoOwnerAvatar src={repoItemData.owner.avatar_url} />
         <a href={repoItemData.html_url} target="_blank" rel="noreferrer">
           <RepoName>{repoItemData.full_name}</RepoName>
         </a>
-      </OwnerWrapper>
-
+      </InfoWrapper>
       <RepoDescription>{repoItemData.description}</RepoDescription>
       <ButtonWrapper isBookmark={isBookmark}>
         <CustomButton
@@ -107,35 +109,10 @@ const RepoItemWrapper = styled.li`
   }
 `
 
-const RepoName = styled.h3`
-  color: #0969da;
-  font-size: 20px;
-  &:hover {
-    text-decoration: underline;
-  }
-`
-
-const RepoDescription = styled.p`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  @media screen and (min-width: 768px) {
-    flex: 1 1 0;
-    padding: 0 20px;
-  }
-`
-
-const OwnerWrapper = styled.div`
+const InfoWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-`
-
-const OwnerAvatar = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  vertical-align: middle;
 `
 
 const ButtonWrapper = styled.div<BookmarkType>`
