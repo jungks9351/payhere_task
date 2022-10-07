@@ -1,4 +1,5 @@
 import CustomButton from 'component/common/CustomButton'
+import useBookmarksDispatch from 'hooks/useBookmarksDispatch'
 
 import { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
@@ -18,6 +19,7 @@ export type BookmarkType = {
 }
 
 const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
+  const dispatch = useBookmarksDispatch()
   const [isBookmark, setIsBookmark] = useState(false)
 
   const addBookmark = () => {
@@ -48,6 +50,7 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
 
     bookmarks.push(payload)
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
+    dispatch({ type: 'updateBookmark', payload: bookmarks })
   }
 
   const removeBookmark = () => {
@@ -58,6 +61,7 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
     )
     localStorage.setItem('bookmarks', JSON.stringify(newBookmarks))
     setIsBookmark(false)
+    dispatch({ type: 'updateBookmark', payload: newBookmarks })
   }
 
   useEffect(() => {

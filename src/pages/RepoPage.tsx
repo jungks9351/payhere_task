@@ -1,9 +1,12 @@
 import RepoList from 'component/repo/RepoList'
+import { BookmarkProvider } from 'context/BookmarkContext'
 
 const RepoPage = () => {
   return (
     <>
-      <RepoList />
+      <BookmarkProvider>
+        <RepoList />
+      </BookmarkProvider>
     </>
   )
 }
