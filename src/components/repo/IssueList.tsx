@@ -1,3 +1,4 @@
+import Pagination from 'component/common/Pagination'
 import RepoName from 'component/repo/RepoName'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
@@ -39,15 +40,18 @@ const IssueList = () => {
   }, [owner, name])
 
   return (
-    <IssueListWrapper>
-      {issueListData.map((issue, idx) => (
-        <IssueItemWrapper key={idx}>
-          <RepoName url={issue.repository_url}>{`${owner}/${name}`}</RepoName>
-          <IssueTitle>{issue.title}</IssueTitle>
-          <a href={issue.html_url}>ISSUE 자세히보기</a>
-        </IssueItemWrapper>
-      ))}
-    </IssueListWrapper>
+    <>
+      <IssueListWrapper>
+        {issueListData.map((issue, idx) => (
+          <IssueItemWrapper key={idx}>
+            <RepoName url={issue.repository_url}>{`${owner}/${name}`}</RepoName>
+            <IssueTitle>{issue.title}</IssueTitle>
+            <a href={issue.html_url}>ISSUE 자세히보기</a>
+          </IssueItemWrapper>
+        ))}
+      </IssueListWrapper>
+      <Pagination />
+    </>
   )
 }
 
