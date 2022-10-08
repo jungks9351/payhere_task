@@ -1,7 +1,7 @@
 import Pagination from 'component/common/Pagination'
 import RepoName from 'component/repo/RepoName'
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 export type IssueType = {
@@ -15,17 +15,27 @@ export type IssueType = {
 }
 
 const IssueList = () => {
+  const [searchParams] = useSearchParams()
   const [issueListData, setIssueListData] = useState<IssueType[]>([])
   const { pathname } = useLocation()
   const owner = pathname.split('/')[2]
   const name = pathname.split('/')[3]
+
+  const [pageNum, setPageNum] = useState(1)
+  const page = searchParams.get('page')
+
+  useEffect(() => {
+    if (page) {
+      setPageNum(parseInt(page))
+    }
+  }, [page])
 
   useEffect(() => {
     const fetchRepoList = async () => {
       const token = process.env.REACT_APP_GITHUB_TOKEN
 
       const res = await fetch(
-        `https://api.github.com/repos/${owner}/${name}/issues?per_page=10`,
+        `https://api.github.com/repos/${owner}/${name}/issues?per_page=10&page=${pageNum}`,
         {
           method: 'GET',
           headers: {
@@ -37,7 +47,7 @@ const IssueList = () => {
       setIssueListData(data)
     }
     fetchRepoList()
-  }, [owner, name])
+  }, [owner, name, pageNum])
 
   return (
     <>

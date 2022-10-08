@@ -1,22 +1,41 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 
-const pageNums = [1, 2, 3, 4, 5]
-
 const Pagination = () => {
+  const { pathname } = useLocation()
+  const owner = pathname.split('/')[2]
+  const name = pathname.split('/')[3]
+
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page')
+  const [pageNum, setPageNum] = useState(1)
+
+  useEffect(() => {
+    if (page) {
+      setPageNum(parseInt(page))
+    }
+  }, [page])
+
   return (
     <PaginaionWrapper>
       <PageNumsList>
-        <PageNumItem>
-          <StyledLink to="/">Prev</StyledLink>
-        </PageNumItem>
-        {pageNums.map((pageNum, idx) => (
-          <PageNumItem key={idx}>
-            <StyledLink to={`/`}>{pageNum}</StyledLink>
+        {pageNum !== 1 && (
+          <PageNumItem>
+            <StyledLink to={`/repo/${owner}/${name}?page=${pageNum - 1}`}>
+              Prev
+            </StyledLink>
           </PageNumItem>
-        ))}
+        )}
         <PageNumItem>
-          <StyledLink to="/">Next</StyledLink>
+          <StyledLink to={`/repo/${owner}/${name}?page=${pageNum}`}>
+            {pageNum}
+          </StyledLink>
+        </PageNumItem>
+        <PageNumItem>
+          <StyledLink to={`/repo/${owner}/${name}?page=${pageNum + 1}`}>
+            Next
+          </StyledLink>
         </PageNumItem>
       </PageNumsList>
     </PaginaionWrapper>
@@ -46,10 +65,6 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   padding: 5px 10px;
   color: #000;
-
-  &:hover {
-    background-color: #d0d7de;
-  }
 `
 
 export default Pagination
