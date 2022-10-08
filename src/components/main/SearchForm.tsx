@@ -48,6 +48,7 @@ const SearchForm = () => {
 
 const SearchFormWrapper = styled.form`
   display: inline-block;
+  width: 100%;
   border: 1px solid #000;
   border-radius: 5px;
 `
@@ -56,6 +57,7 @@ const SearchFormField = styled.div`
   margin: 4px 8px;
 
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 8px;
 `
