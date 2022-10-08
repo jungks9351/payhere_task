@@ -1,18 +1,15 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { FormEvent } from 'react'
 import styled from 'styled-components'
 
 import CustomButton from 'component/common/CustomButton'
 import CustomInput from 'component/common/CustomInput'
 import { useNavigate } from 'react-router-dom'
+import useInputValue from 'hooks/useInputValue'
 
 const SearchForm = () => {
   const navigate = useNavigate()
-  const [search, setSearch] = useState('')
-
-  const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value
-    setSearch(newValue)
-  }
+  const { value: search, handleChangeValue: handleChangeSearch } =
+    useInputValue()
 
   const handleSubmitSearchFrom = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
