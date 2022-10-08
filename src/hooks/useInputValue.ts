@@ -12,5 +12,3 @@ const useInputValue = () => {
 }
 
 export default useInputValue
-
-const { value: search, handleChangeValue: handleChangeSearch } = useInputValue()
