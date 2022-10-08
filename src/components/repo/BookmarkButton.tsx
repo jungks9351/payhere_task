@@ -2,17 +2,8 @@ import CustomButton from 'component/common/CustomButton'
 import useBookmarksDispatch from 'hooks/useBookmarksDispatch'
 
 import { useEffect, useState } from 'react'
+import { RepoItmeType } from 'src/type'
 import styled, { css } from 'styled-components'
-
-export type RepoItmeType = {
-  id: number
-  full_name: string
-  owner: {
-    avatar_url: string
-  }
-  description: string
-  html_url: string
-}
 
 export type BookmarkType = {
   isBookmark: boolean
