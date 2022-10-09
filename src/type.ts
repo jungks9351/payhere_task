@@ -1,4 +1,4 @@
-export type RepoItmeType = {
+export type RepoType = {
   id: number
   full_name: string
   owner: {
@@ -6,4 +6,10 @@ export type RepoItmeType = {
   }
   description: string
   html_url: string
+}
+
+export type IssueType = {
+  title: string
+  html_url: string
+  state: string
 }
