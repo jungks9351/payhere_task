@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { IssueType } from 'src/type'
 
-import RepoName from 'component/repo/RepoName'
+import RepoName from 'component/repository/RepoName'
 import IssueTitle from 'component/issue/IssueTitle'
 import IssueState from 'component/issue/IssueState'
 

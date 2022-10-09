@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import IssueList from './IssueList'
+import IssueList from 'component/issue/IssueList'
 
 const IssuesCotainer = () => {
   return (

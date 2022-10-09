@@ -1,10 +1,11 @@
 import Pagination from 'component/common/Pagination'
-
 import { useEffect, useState } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
+
 import { IssueType } from 'src/type'
+
 import styled from 'styled-components'
-import IssueItem from './IssueItem'
+import IssueItem from 'component/issue/IssueItem'
 
 const IssueList = () => {
   const [searchParams] = useSearchParams()
