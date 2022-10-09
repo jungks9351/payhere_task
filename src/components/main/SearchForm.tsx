@@ -25,7 +25,7 @@ const SearchForm = () => {
           autoComplete="off"
           placeholder="Repository 이름을 입력해주세요"
           onChange={handleChangeSearch}
-          width={250}
+          width={300}
           height={30}
           fontSize={16}
         />
@@ -44,14 +44,18 @@ const SearchForm = () => {
 }
 
 const SearchFormWrapper = styled.form`
-  display: inline-block;
-  width: 100%;
-  border: 1px solid #000;
-  border-radius: 5px;
+  width: 350px;
+
+  box-shadow: 0 1px 6px 0 #a6aab0;
+  border-radius: 20px;
+
+  @media screen and (min-width: 760px) {
+    width: 500px;
+  }
 `
 
 const SearchFormField = styled.div`
-  margin: 4px 8px;
+  margin: 4px 16px;
 
   display: flex;
   justify-content: space-between;

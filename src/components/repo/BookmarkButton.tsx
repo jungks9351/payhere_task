@@ -79,15 +79,26 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
 }
 
 const ButtonWrapper = styled.div<BookmarkType>`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
   padding: 10px 0;
   button {
-    color: #20c997;
+    color: #a6aab0;
+    &:hover {
+      color: #20c997;
+      text-decoration: underline;
+    }
   }
+  z-index: 100;
   ${({ isBookmark }) =>
     isBookmark &&
     css`
-      button {
-        color: #ff6b6b;
+      &:hover {
+        button {
+          color: #ff6b6b;
+        }
       }
     `};
 `

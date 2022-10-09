@@ -6,6 +6,9 @@ import useBookmarksDispatch from 'hooks/useBookmarksDispatch'
 
 import RepoItem from 'component/repo/RepoItem'
 import { Link } from 'react-router-dom'
+import RepoName from 'component/repo/RepoName'
+import BookmarkItem from './BookmarkItem'
+import NoBookmarkList from './NoBookmarkList'
 
 const BookmarkList = () => {
   const bookmarks = useBookmarksState()
@@ -15,34 +18,37 @@ const BookmarkList = () => {
     const bookmarksData = JSON.parse(localStorage.getItem('bookmarks') || '[]')
     dispatch({ type: 'updateBookmark', payload: bookmarksData })
   }, [dispatch])
+  console.log(bookmarks)
   return (
-    <BookmarkListWrapper>
-      {bookmarks.map((bookmark, idx) => (
-        <RepoItemWrapper key={idx}>
-          <RepoItem repoItemData={bookmark} />
-          <LinkWrapper>
-            <Link to={`repo/${bookmark.full_name}`}>ISSUES 보러가기</Link>
-          </LinkWrapper>
-        </RepoItemWrapper>
-      ))}
-    </BookmarkListWrapper>
+    <>
+      <BookmarkListTitle>북마크 {`${bookmarks.length}/4`}</BookmarkListTitle>
+      {bookmarks.length !== 0 ? (
+        <>
+          <BookmarkListWrapper>
+            {bookmarks.map((bookmark, idx) => (
+              <BookmarkItem key={idx} bookmarkData={bookmark} />
+            ))}
+          </BookmarkListWrapper>
+        </>
+      ) : (
+        <NoBookmarkList />
+      )}
+    </>
   )
 }
 
 const BookmarkListWrapper = styled.ul`
-  padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `
 
-const RepoItemWrapper = styled.li`
-  border-bottom: 1px solid #d0d7de;
-`
+const BookmarkListTitle = styled.h2`
+  text-align: center;
+  padding: 30px 0;
 
-const LinkWrapper = styled.div`
-  font-weight: bold;
-  padding: 8px 16px;
-  &:hover {
-    text-decoration: underline;
-  }
+  letter-spacing: 1px;
 `
 
 export default BookmarkList

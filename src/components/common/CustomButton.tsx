@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 interface CustomButtonProps {
-  onClick: () => void
+  onClick?: () => void
   type: 'button' | 'submit' | 'reset' | undefined
   title: string
   children: string

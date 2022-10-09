@@ -6,7 +6,6 @@ import { BookmarkProvider } from 'context/BookmarkContext'
 const BookmarkSection = () => {
   return (
     <BookmarkSectionWrapper>
-      <SectionTitle>내가 자주가는 GitHub Public Repository</SectionTitle>
       <BookmarkProvider>
         <BookmarkList />
       </BookmarkProvider>
@@ -17,12 +16,8 @@ const BookmarkSection = () => {
 const BookmarkSectionWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
 
-const SectionTitle = styled.h2`
-  text-align: center;
+  padding: 30px 0;
 `
 
 export default BookmarkSection

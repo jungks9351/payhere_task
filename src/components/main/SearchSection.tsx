@@ -15,20 +15,22 @@ const SearchSection = () => {
 }
 
 const SearchSectionWrapper = styled.section`
-  height: 50vh;
+  width: 100%;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  gap: 40px;
-
-  @media screen and (min-width: 768px) {
-    flex-direction: row;
-    gap: 20px;
-  }
 `
 
-const SearchSectionTitle = styled.h2``
+const SearchSectionTitle = styled.h2`
+  padding-bottom: 40px;
+
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    font-size: 30px;
+  }
+`
 
 export default SearchSection
