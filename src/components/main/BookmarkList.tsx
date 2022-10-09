@@ -4,9 +4,6 @@ import styled from 'styled-components'
 import useBookmarksState from 'hooks/useBookmarksState'
 import useBookmarksDispatch from 'hooks/useBookmarksDispatch'
 
-import RepoItem from 'component/repo/RepoItem'
-import { Link } from 'react-router-dom'
-import RepoName from 'component/repo/RepoName'
 import BookmarkItem from './BookmarkItem'
 import NoBookmarkList from './NoBookmarkList'
 
@@ -18,7 +15,7 @@ const BookmarkList = () => {
     const bookmarksData = JSON.parse(localStorage.getItem('bookmarks') || '[]')
     dispatch({ type: 'updateBookmark', payload: bookmarksData })
   }, [dispatch])
-  console.log(bookmarks)
+
   return (
     <>
       <BookmarkListTitle>북마크 {`${bookmarks.length}/4`}</BookmarkListTitle>
