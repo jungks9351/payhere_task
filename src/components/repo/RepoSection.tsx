@@ -15,7 +15,7 @@ const RepoSectionWrapper = styled.section`
   display: flex;
   flex-direction: column;
 
-  /* padding: 10vw 5vw; */
+  padding: 0 5vw;
 `
 
 export default RepoSection

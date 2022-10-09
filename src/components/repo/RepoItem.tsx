@@ -20,7 +20,12 @@ const RepoItem = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
             width={30}
             height={30}
           />
-          <RepoName fontSize={18}>{repoItemData.full_name}</RepoName>
+          <LinkWrapper
+            href={repoItemData.html_url}
+            title={repoItemData.html_url}
+          >
+            <RepoName fontSize={18}>{repoItemData.full_name}</RepoName>
+          </LinkWrapper>
         </MainInfoWrapper>
         <RepoDescription>{repoItemData.description}</RepoDescription>
       </InfoWrapper>
@@ -31,8 +36,6 @@ const RepoItem = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
 
 const RepoItemWrapper = styled.li`
   position: relative;
-
-  padding: 0 20px;
 
   border-bottom: 1px solid #d0d7de;
 `
@@ -53,6 +56,13 @@ const MainInfoWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+`
+
+const LinkWrapper = styled.a`
+  color: #0969da;
+  &:hover {
+    text-decoration: underline;
+  }
 `
 
 export default RepoItem

@@ -72,7 +72,7 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
         title="bookmark button"
         fontSize={14}
       >
-        {!isBookmark ? '추가' : '삭제'}
+        {!isBookmark ? '북마크' : '삭제'}
       </CustomButton>
     </ButtonWrapper>
   )
@@ -83,7 +83,8 @@ const ButtonWrapper = styled.div<BookmarkType>`
   top: 8px;
   right: 8px;
 
-  padding: 10px 0;
+  z-index: 100;
+
   button {
     color: #a6aab0;
     &:hover {
@@ -91,7 +92,6 @@ const ButtonWrapper = styled.div<BookmarkType>`
       text-decoration: underline;
     }
   }
-  z-index: 100;
   ${({ isBookmark }) =>
     isBookmark &&
     css`

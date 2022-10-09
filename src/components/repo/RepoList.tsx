@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import RepoItem from 'component/repo/RepoItem'
 import styled from 'styled-components'
 import { RepoItmeType } from 'src/type'
+import Pagination from 'component/common/Pagination'
 
 const RepoList = () => {
   const [searchParams] = useSearchParams()
@@ -30,13 +31,20 @@ const RepoList = () => {
 
   return (
     <>
-      <RespoListTitle>{`"${searchParams.get('q')}" 검색 결과`}</RespoListTitle>
-      <RespoListWrapper>
-        {repoListData &&
-          repoListData.map((repoItemData, idx) => (
-            <RepoItem key={idx} repoItemData={repoItemData} />
-          ))}
-      </RespoListWrapper>
+      {repoListData.length !== 0 && (
+        <>
+          <RespoListTitle>{`"${searchParams.get(
+            'q',
+          )}" 검색 결과`}</RespoListTitle>
+          <RespoListWrapper>
+            {repoListData &&
+              repoListData.map((repoItemData, idx) => (
+                <RepoItem key={idx} repoItemData={repoItemData} />
+              ))}
+          </RespoListWrapper>
+          <Pagination />
+        </>
+      )}
     </>
   )
 }
@@ -47,8 +55,7 @@ const RespoListWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  padding: 0 5vw;
+  padding-bottom: 30px;
 `
 
 const RespoListTitle = styled.h2`
