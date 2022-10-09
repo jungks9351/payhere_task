@@ -1,11 +1,11 @@
 import Layout from 'component/common/Layout'
 import BookmarkContainer from 'component/bookmark/BookmarkContainer'
-import SearchSection from 'component/main/SearchSection'
+import SearchContainer from 'component/search/SearchContainer'
 
 const MainPage = () => {
   return (
     <Layout>
-      <SearchSection />
+      <SearchContainer />
       <BookmarkContainer />
     </Layout>
   )
