@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import SearchForm from 'component/main/SearchForm'
+import RepoSearchForm from 'component/search/SearchRepoForm'
 
 const SearchSection = () => {
   return (
@@ -9,7 +9,7 @@ const SearchSection = () => {
         자주 가는 GitHub <br />
         Public Repository를 검색하세요
       </SearchSectionTitle>
-      <SearchForm />
+      <RepoSearchForm />
     </SearchSectionWrapper>
   )
 }

@@ -2,9 +2,10 @@ import { FormEvent } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
+import useInputValue from 'hooks/useInputValue'
+
 import CustomButton from 'component/common/CustomButton'
 import CustomInput from 'component/common/CustomInput'
-import useInputValue from 'hooks/useInputValue'
 
 const SearchForm = () => {
   const navigate = useNavigate()
