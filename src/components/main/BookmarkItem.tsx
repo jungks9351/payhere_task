@@ -63,6 +63,8 @@ const RepoInfoWrapper = styled.div`
 
   padding: 8px;
 
+  text-align: center;
+
   &:hover {
     background-color: #ecedf1;
   }
