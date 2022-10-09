@@ -6,7 +6,7 @@ import useBookmarksDispatch from 'hooks/useBookmarksDispatch'
 
 import CustomButton from 'component/common/CustomButton'
 
-export type BookmarkType = {
+type BookmarkType = {
   isBookmark: boolean
 }
 
@@ -15,18 +15,12 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoType }) => {
   const [isBookmark, setIsBookmark] = useState(false)
 
   const addBookmark = () => {
-    const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
+    const bookmarkData = JSON.parse(localStorage.getItem('bookmarks') || '[]')
 
-    if (bookmarks.length === 4 && !isBookmark) {
+    if (bookmarkData.length === 4 && !isBookmark) {
       alert('북마크는 4개까지만 가능합니다.')
       return
     }
-
-    bookmarks.map((bookmark: RepoType) => {
-      if (bookmark.id === repoItemData.id) setIsBookmark(true)
-    })
-
-    if (isBookmark) return
 
     const payload = {
       id: repoItemData.id,
@@ -38,32 +32,35 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoType }) => {
       html_url: repoItemData.html_url,
     }
 
-    setIsBookmark(true)
+    bookmarkData.push(payload)
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarkData))
 
-    bookmarks.push(payload)
-    localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
-    dispatch({ type: 'updateBookmark', payload: bookmarks })
+    dispatch({ type: 'createBookmark', bookmark: payload })
+
+    setIsBookmark(true)
   }
 
   const removeBookmark = () => {
-    const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
-
-    const newBookmarks = bookmarks.filter(
+    const bookmarkData = JSON.parse(localStorage.getItem('bookmarks') || '[]')
+    const newBookmarks = bookmarkData.filter(
       (bookmark: RepoType) => bookmark.id !== repoItemData.id,
     )
     localStorage.setItem('bookmarks', JSON.stringify(newBookmarks))
+
+    dispatch({ type: 'removeBookmark', id: repoItemData.id })
+
     setIsBookmark(false)
-    dispatch({ type: 'updateBookmark', payload: newBookmarks })
   }
 
   useEffect(() => {
-    const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
-    bookmarks.map((bookmark: RepoType) => {
+    const bookmarkData = JSON.parse(localStorage.getItem('bookmarks') || '[]')
+    bookmarkData.map((bookmark: RepoType) => {
       if (bookmark.id === repoItemData.id) {
         setIsBookmark(true)
       }
     })
-  }, [repoItemData.id])
+    dispatch({ type: 'updateBookmark', payload: bookmarkData })
+  }, [repoItemData.id, dispatch])
 
   return (
     <ButtonWrapper isBookmark={isBookmark}>

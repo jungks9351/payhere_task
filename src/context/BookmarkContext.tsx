@@ -1,24 +1,30 @@
 import { createContext, Dispatch, ReactNode, useReducer } from 'react'
 
-import { RepoItmeType } from 'src/type'
+import { RepoType } from 'src/type'
 
-type Action = {
-  type: string
-  payload: RepoItmeType[]
-}
+type Action =
+  | { type: 'updateBookmark'; payload: RepoType[] }
+  | { type: 'createBookmark'; bookmark: RepoType }
+  | { type: 'removeBookmark'; id: number }
 
-const initialBookmark: RepoItmeType[] = []
+const initialBookmark: RepoType[] = []
 
-const bookmarkReducer = (state: RepoItmeType[], action: Action) => {
+const bookmarkReducer = (state: RepoType[], action: Action) => {
   switch (action.type) {
     case 'updateBookmark':
       return (state = action.payload)
+    case 'createBookmark': {
+      return (state = [...state, action.bookmark])
+    }
+    case 'removeBookmark': {
+      return state.filter((bookmark) => bookmark.id !== action.id)
+    }
     default:
       throw new Error('Error')
   }
 }
 
-export type BookmarkState = RepoItmeType[]
+export type BookmarkState = RepoType[]
 export type BookmarkDispatch = Dispatch<Action>
 
 export const BookmarkStateContext = createContext<BookmarkState | null>(null)
