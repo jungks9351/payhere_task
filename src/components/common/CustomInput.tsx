@@ -7,8 +7,8 @@ interface CustomInputProps {
   type: string
   autoComplete: string
   placeholder: string
-  width: number
-  height: number
+  width: string
+  height: string
   fontSize: number
 }
 
@@ -37,8 +37,8 @@ const CustomInput = ({
 }
 
 const StyledInput = styled.input<CustomInputProps>`
-  width: ${({ width }) => `${width}px`};
-  height: ${({ height }) => `${height}px`};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   font-size: ${({ fontSize }) => `${fontSize}px`};
 `
 

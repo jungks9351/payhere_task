@@ -1,9 +1,9 @@
 import { FormEvent } from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 import CustomButton from 'component/common/CustomButton'
 import CustomInput from 'component/common/CustomInput'
-import { useNavigate } from 'react-router-dom'
 import useInputValue from 'hooks/useInputValue'
 
 const SearchForm = () => {
@@ -25,8 +25,8 @@ const SearchForm = () => {
           autoComplete="off"
           placeholder="Repository 이름을 입력해주세요"
           onChange={handleChangeSearch}
-          width={300}
-          height={30}
+          width={'100%'}
+          height={'30px'}
           fontSize={16}
         />
         <CustomButton
@@ -61,6 +61,14 @@ const SearchFormField = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+
+  button {
+    color: #a6aab0;
+
+    &:hover {
+      color: #000000;
+    }
+  }
 `
 
 export default SearchForm
