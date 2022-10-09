@@ -1,10 +1,11 @@
-import IssueList from 'component/repo/IssueList'
+import Layout from 'component/common/Layout'
+import IssueCotainer from 'component/issue/IssueContainer'
 
 const RepoDetailPage = () => {
   return (
-    <>
-      <IssueList />
-    </>
+    <Layout>
+      <IssueCotainer />
+    </Layout>
   )
 }
 

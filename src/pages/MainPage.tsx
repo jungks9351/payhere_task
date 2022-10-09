@@ -1,12 +1,12 @@
 import Layout from 'component/common/Layout'
-import BookmarkSection from 'component/main/BookmarkSection'
+import BookmarkContainer from 'component/bookmark/BookmarkContainer'
 import SearchSection from 'component/main/SearchSection'
 
 const MainPage = () => {
   return (
     <Layout>
       <SearchSection />
-      <BookmarkSection />
+      <BookmarkContainer />
     </Layout>
   )
 }

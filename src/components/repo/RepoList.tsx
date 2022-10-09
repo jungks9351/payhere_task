@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import RepoItem from 'component/repo/RepoItem'
 import styled from 'styled-components'
-import { RepoItmeType } from 'src/type'
+import { RepoType } from 'src/type'
 import Pagination from 'component/common/Pagination'
 
 const RepoList = () => {
   const [searchParams] = useSearchParams()
-  const [repoListData, setRepoListData] = useState<RepoItmeType[]>([])
+  const [repoListData, setRepoListData] = useState<RepoType[]>([])
 
   useEffect(() => {
     const fetchRepoList = async () => {

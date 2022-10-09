@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
-import { RepoItmeType } from 'src/type'
+import { RepoType } from 'src/type'
 
-import BookmarkButton from 'component/repo/BookmarkButton'
+import BookmarkButton from 'component/bookmark/BookmarkButton'
 import RepoName from 'component/repo/RepoName'
 import RepoOwnerAvatar from 'component/repo/RepoOwnerAvatar'
 import { Link } from 'react-router-dom'
 
-const BookmarkItem = ({ bookmarkData }: { bookmarkData: RepoItmeType }) => {
+const BookmarkItem = ({ bookmarkData }: { bookmarkData: RepoType }) => {
   return (
     <BookmarkItemWrapper>
       <Link

@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import useBookmarksState from 'hooks/useBookmarksState'
 import useBookmarksDispatch from 'hooks/useBookmarksDispatch'
 
-import BookmarkItem from './BookmarkItem'
-import NoBookmarkList from './NoBookmarkList'
+import BookmarkItem from 'component/bookmark/BookmarkItem'
+import BookmarkNoList from 'component/bookmark/BookmarkNoList'
 
 const BookmarkList = () => {
   const bookmarks = useBookmarksState()
@@ -18,7 +18,7 @@ const BookmarkList = () => {
 
   return (
     <>
-      <BookmarkListTitle>북마크 {`${bookmarks.length}/4`}</BookmarkListTitle>
+      <BookmarkListTitle>북마크 {`${bookmarks.length} / 4`}</BookmarkListTitle>
       {bookmarks.length !== 0 ? (
         <>
           <BookmarkListWrapper>
@@ -28,7 +28,7 @@ const BookmarkList = () => {
           </BookmarkListWrapper>
         </>
       ) : (
-        <NoBookmarkList />
+        <BookmarkNoList />
       )}
     </>
   )

@@ -1,15 +1,16 @@
-import CustomButton from 'component/common/CustomButton'
+import { useEffect, useState } from 'react'
+import { RepoType } from 'src/type'
+import styled, { css } from 'styled-components'
+
 import useBookmarksDispatch from 'hooks/useBookmarksDispatch'
 
-import { useEffect, useState } from 'react'
-import { RepoItmeType } from 'src/type'
-import styled, { css } from 'styled-components'
+import CustomButton from 'component/common/CustomButton'
 
 export type BookmarkType = {
   isBookmark: boolean
 }
 
-const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
+const BookmarkButton = ({ repoItemData }: { repoItemData: RepoType }) => {
   const dispatch = useBookmarksDispatch()
   const [isBookmark, setIsBookmark] = useState(false)
 
@@ -21,7 +22,7 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
       return
     }
 
-    bookmarks.map((bookmark: RepoItmeType) => {
+    bookmarks.map((bookmark: RepoType) => {
       if (bookmark.id === repoItemData.id) setIsBookmark(true)
     })
 
@@ -48,7 +49,7 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
     const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
 
     const newBookmarks = bookmarks.filter(
-      (bookmark: RepoItmeType) => bookmark.id !== repoItemData.id,
+      (bookmark: RepoType) => bookmark.id !== repoItemData.id,
     )
     localStorage.setItem('bookmarks', JSON.stringify(newBookmarks))
     setIsBookmark(false)
@@ -57,7 +58,7 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
 
   useEffect(() => {
     const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
-    bookmarks.map((bookmark: RepoItmeType) => {
+    bookmarks.map((bookmark: RepoType) => {
       if (bookmark.id === repoItemData.id) {
         setIsBookmark(true)
       }
