@@ -29,23 +29,31 @@ const RepoList = () => {
   }, [searchParams])
 
   return (
-    <RespoListWrapper>
-      {repoListData &&
-        repoListData.map((repoItemData, idx) => (
-          <RepoItemWrapper key={idx}>
-            <RepoItem repoItemData={repoItemData} />
-          </RepoItemWrapper>
-        ))}
-    </RespoListWrapper>
+    <>
+      <RespoListTitle>{`"${searchParams.get('q')}" 검색 결과`}</RespoListTitle>
+      <RespoListWrapper>
+        {repoListData &&
+          repoListData.map((repoItemData, idx) => (
+            <RepoItem key={idx} repoItemData={repoItemData} />
+          ))}
+      </RespoListWrapper>
+    </>
   )
 }
 
 const RespoListWrapper = styled.ul`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   padding: 0 5vw;
 `
 
-const RepoItemWrapper = styled.li`
-  border-bottom: 1px solid #d0d7de;
-`
+const RespoListTitle = styled.h2`
+  padding: 30px 0;
 
+  text-align: center;
+`
 export default RepoList

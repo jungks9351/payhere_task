@@ -9,13 +9,15 @@ const RepoDescription = ({ children }: RepoDescriptionProps) => {
 }
 
 const RepoDescriptionWrapper = styled.p`
+  width: 100%;
+
+  margin-right: 16px;
+
+  line-height: 2;
+
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  @media screen and (min-width: 768px) {
-    flex: 1 1 0;
-    padding: 0 20px;
-  }
 `
 
 export default RepoDescription

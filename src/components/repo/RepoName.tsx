@@ -15,8 +15,6 @@ const RepoNameWrapper = styled.h3<ReponameProps>`
 
   width: 100%;
 
-  text-align: center;
-
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

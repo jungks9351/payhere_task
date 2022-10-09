@@ -14,34 +14,45 @@ const RepoItem = ({ repoItemData }: { repoItemData: RepoItmeType }) => {
   return (
     <RepoItemWrapper>
       <InfoWrapper>
-        <RepoOwnerAvatar src={repoItemData.owner.avatar_url} />
-        <RepoName url={repoItemData.html_url}>
-          {repoItemData.full_name}
-        </RepoName>
+        <MainInfoWrapper>
+          <RepoOwnerAvatar
+            src={repoItemData.owner.avatar_url}
+            width={30}
+            height={30}
+          />
+          <RepoName fontSize={18}>{repoItemData.full_name}</RepoName>
+        </MainInfoWrapper>
+        <RepoDescription>{repoItemData.description}</RepoDescription>
       </InfoWrapper>
-      <RepoDescription>{repoItemData.description}</RepoDescription>
       <BookmarkButton repoItemData={repoItemData} />
     </RepoItemWrapper>
   )
 }
 
-const RepoItemWrapper = styled.div`
-  padding: 10px 16px;
+const RepoItemWrapper = styled.li`
+  position: relative;
 
-  display: flex;
-  flex-direction: column;
+  padding: 0 20px;
 
-  @media screen and (min-width: 768px) {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
+  border-bottom: 1px solid #d0d7de;
 `
 
 const InfoWrapper = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 10px;
+
+  padding: 8px;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+`
+
+const MainInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `
 
 export default RepoItem
