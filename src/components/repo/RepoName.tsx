@@ -3,24 +3,23 @@ import styled from 'styled-components'
 
 type ReponameProps = {
   children: string
-  url: string
+  fontSize: number
 }
 
-const RepoName = ({ children, url }: ReponameProps) => {
-  return (
-    <a href={url} target="_blank" rel="noreferrer">
-      <RepoNameWrapper>{children}</RepoNameWrapper>
-    </a>
-  )
+const RepoName = ({ children, fontSize }: ReponameProps) => {
+  return <RepoNameWrapper fontSize={fontSize}>{children}</RepoNameWrapper>
 }
 
-const RepoNameWrapper = styled.h3`
-  cursor: pointer;
-  color: #0969da;
-  font-size: 20px;
-  &:hover {
-    text-decoration: underline;
-  }
+const RepoNameWrapper = styled.h3<ReponameProps>`
+  font-size: ${({ fontSize }) => `${fontSize}px`};
+
+  width: 100%;
+
+  text-align: center;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `
 
 export default RepoName
