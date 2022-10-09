@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import RepoItem from 'component/repo/RepoItem'
 import styled from 'styled-components'
+
 import { RepoType } from 'src/type'
+
+import RepoItem from 'component/repository/RepoItem'
 import Pagination from 'component/common/Pagination'
 
 const RepoList = () => {
   const [searchParams] = useSearchParams()
-  const [repoListData, setRepoListData] = useState<RepoType[]>([])
+  const [repoList, setRepoList] = useState<RepoType[]>([])
 
   useEffect(() => {
     const fetchRepoList = async () => {
@@ -24,21 +26,21 @@ const RepoList = () => {
         },
       )
       const data = await res.json()
-      setRepoListData(data.items)
+      setRepoList(data.items)
     }
     fetchRepoList()
   }, [searchParams])
 
   return (
     <>
-      {repoListData.length !== 0 && (
+      {repoList.length !== 0 && (
         <>
           <RespoListTitle>{`"${searchParams.get(
             'q',
           )}" 검색 결과`}</RespoListTitle>
           <RespoListWrapper>
-            {repoListData &&
-              repoListData.map((repoItemData, idx) => (
+            {repoList &&
+              repoList.map((repoItemData, idx) => (
                 <RepoItem key={idx} repoItemData={repoItemData} />
               ))}
           </RespoListWrapper>

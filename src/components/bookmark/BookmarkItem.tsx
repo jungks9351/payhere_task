@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { RepoType } from 'src/type'
 
 import BookmarkButton from 'component/bookmark/BookmarkButton'
-import RepoName from 'component/repo/RepoName'
-import RepoOwnerAvatar from 'component/repo/RepoOwnerAvatar'
+import RepoName from 'component/repository/RepoName'
+import RepoOwnerAvatar from 'component/repository/RepoOwnerAvatar'
 import { Link } from 'react-router-dom'
 
 const BookmarkItem = ({ bookmarkData }: { bookmarkData: RepoType }) => {

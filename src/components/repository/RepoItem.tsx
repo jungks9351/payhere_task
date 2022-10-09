@@ -1,14 +1,11 @@
 import styled from 'styled-components'
 
-import RepoName from 'component/repo/RepoName'
-import RepoDescription from 'component/repo/RepoDescription'
-import RepoOwnerAvatar from 'component/repo/RepoOwnerAvatar'
-import BookmarkButton from 'component/bookmark/BookmarkButton'
 import { RepoType } from 'src/type'
 
-export type BookmarkType = {
-  isBookmark: boolean
-}
+import RepoName from 'component/repository/RepoName'
+import RepoDescription from 'component/repository/RepoDescription'
+import RepoOwnerAvatar from 'component/repository/RepoOwnerAvatar'
+import BookmarkButton from 'component/bookmark/BookmarkButton'
 
 const RepoItem = ({ repoItemData }: { repoItemData: RepoType }) => {
   return (

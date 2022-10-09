@@ -1,16 +1,15 @@
-import React from 'react'
 import styled from 'styled-components'
 
-type ReponameProps = {
+type RepoNameProps = {
   children: string
   fontSize: number
 }
 
-const RepoName = ({ children, fontSize }: ReponameProps) => {
+const RepoName = ({ children, fontSize }: RepoNameProps) => {
   return <RepoNameWrapper fontSize={fontSize}>{children}</RepoNameWrapper>
 }
 
-const RepoNameWrapper = styled.h3<ReponameProps>`
+const RepoNameWrapper = styled.h3<RepoNameProps>`
   font-size: ${({ fontSize }) => `${fontSize}px`};
 
   width: 100%;
