@@ -8,22 +8,23 @@ import { serachRespository } from 'src/api/repository'
 import RepoItem from 'component/repository/RepoItem'
 import Pagination from 'component/common/Pagination'
 import Loading from 'component/common/Loading'
-import useLastPage from 'hooks/useLastPage'
+
+import usePagination from 'hooks/usePagination'
 
 const RepoList = () => {
   const [searchParams] = useSearchParams()
-  const [repoList, setRepoList] = useState<RepoType[]>([])
+  const [repoListData, setRepoListData] = useState<RepoType[]>([])
   const [loading, setLoading] = useState(false)
-  const isLastPage = useLastPage(repoList.length, 10)
+  const { isLastPage, pageNum } = usePagination(repoListData.length, 10)
 
   useEffect(() => {
     const fetchRepoList = async () => {
       const q = searchParams.get('q')
       setLoading(true)
       try {
-        const searchData = await serachRespository(q, 1)
+        const searchData = await serachRespository(q, pageNum)
         setLoading(false)
-        setRepoList(searchData.items)
+        setRepoListData(searchData.items)
       } catch (err) {
         setLoading(true)
         throw new Error('serachRespository API Error')
@@ -31,7 +32,7 @@ const RepoList = () => {
     }
 
     fetchRepoList()
-  }, [searchParams])
+  }, [searchParams, pageNum])
 
   return (
     <>
@@ -41,8 +42,8 @@ const RepoList = () => {
             'q',
           )}" 검색 결과`}</RespoListTitle>
           <RespoListWrapper>
-            {repoList &&
-              repoList.map((repoItemData, idx) => (
+            {repoListData &&
+              repoListData.map((repoItemData, idx) => (
                 <RepoItem key={idx} repoItemData={repoItemData} />
               ))}
           </RespoListWrapper>
