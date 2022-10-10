@@ -2,20 +2,21 @@ import styled from 'styled-components'
 
 import RepoSearchForm from 'component/search/SearchRepoForm'
 
-const SearchSection = () => {
+const SearchContainer = () => {
   return (
-    <SearchSectionWrapper>
-      <SearchSectionTitle>
+    <SearchContainerWrapper>
+      <SearchContainerTitle>
         자주 가는 GitHub <br />
         Public Repository를 검색하세요
-      </SearchSectionTitle>
+      </SearchContainerTitle>
       <RepoSearchForm />
-    </SearchSectionWrapper>
+    </SearchContainerWrapper>
   )
 }
 
-const SearchSectionWrapper = styled.section`
+const SearchContainerWrapper = styled.section`
   width: 100%;
+  height: 30vh;
 
   display: flex;
   flex-direction: column;
@@ -23,14 +24,10 @@ const SearchSectionWrapper = styled.section`
   align-items: center;
 `
 
-const SearchSectionTitle = styled.h2`
-  padding-bottom: 40px;
+const SearchContainerTitle = styled.h2`
+  padding: 30px 0;
 
   text-align: center;
-
-  @media screen and (min-width: 768px) {
-    font-size: 30px;
-  }
 `
 
-export default SearchSection
+export default SearchContainer

@@ -10,10 +10,9 @@ const RepoContainer = () => {
 }
 
 const RepoContainerWrapper = styled.section`
-  height: 100vh;
-
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   padding: 0 5vw;
 `
