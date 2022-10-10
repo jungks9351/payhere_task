@@ -7,6 +7,8 @@ const Main = ({ children }: { children: ReactNode }) => {
 
 const MainWrapper = styled.main`
   flex-grow: 1;
+
+  padding: 0 5vw;
 `
 
 export default Main

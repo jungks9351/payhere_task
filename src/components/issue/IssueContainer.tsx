@@ -14,8 +14,6 @@ const IssuesCotainerWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  padding: 0 5vw;
 `
 
 export default IssuesCotainer

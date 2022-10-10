@@ -13,8 +13,6 @@ const RepoContainerWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  padding: 0 5vw;
 `
 
 export default RepoContainer
