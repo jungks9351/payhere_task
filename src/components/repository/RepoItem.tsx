@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 
 import { RepoType } from 'src/type'
@@ -67,4 +68,4 @@ const LinkWrapper = styled.a`
   }
 `
 
-export default RepoItem
+export default React.memo(RepoItem)
