@@ -3,37 +3,37 @@ import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { RepoType } from 'src/type'
+import { serachRespository } from 'src/api/repository'
 
 import RepoItem from 'component/repository/RepoItem'
 import Pagination from 'component/common/Pagination'
+import Loading from 'component/common/Loading'
 
 const RepoList = () => {
   const [searchParams] = useSearchParams()
   const [repoList, setRepoList] = useState<RepoType[]>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const fetchRepoList = async () => {
       const q = searchParams.get('q')
-      const token = process.env.REACT_APP_GITHUB_TOKEN
-
-      const res = await fetch(
-        `https://api.github.com/search/repositories?q=${q}&sort=starts&order=desc&per_page=10&page=1`,
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
-      const data = await res.json()
-      setRepoList(data.items)
+      setLoading(true)
+      try {
+        const searchData = await serachRespository(q, 1)
+        setLoading(false)
+        setRepoList(searchData.items)
+      } catch (err) {
+        setLoading(true)
+        throw new Error('serachRespository API Error')
+      }
     }
+
     fetchRepoList()
   }, [searchParams])
 
   return (
     <>
-      {repoList.length !== 0 && (
+      {!loading ? (
         <>
           <RespoListTitle>{`"${searchParams.get(
             'q',
@@ -46,6 +46,8 @@ const RepoList = () => {
           </RespoListWrapper>
           <Pagination />
         </>
+      ) : (
+        <Loading />
       )}
     </>
   )
