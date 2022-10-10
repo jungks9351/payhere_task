@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 
-const Pagination = () => {
+type PaginationProps = {
+  isLastPage: boolean
+}
+
+const Pagination = ({ isLastPage }: PaginationProps) => {
   const { pathname } = useLocation()
 
   const [searchParams] = useSearchParams()
@@ -31,23 +35,23 @@ const Pagination = () => {
           </PrevLinkItem>
         )}
         <PageNumItem>{pageNum}</PageNumItem>
-        <NextLinkItem>
-          <StyledLink
-            to={`${pathname}?${search ? `q=${search}&` : ''}page=${
-              pageNum + 1
-            }`}
-          >
-            Next
-          </StyledLink>
-        </NextLinkItem>
+        {!isLastPage && (
+          <NextLinkItem>
+            <StyledLink
+              to={`${pathname}?${search ? `q=${search}&` : ''}page=${
+                pageNum + 1
+              }`}
+            >
+              Next
+            </StyledLink>
+          </NextLinkItem>
+        )}
       </PageNumsList>
     </PaginaionWrapper>
   )
 }
 
 const PaginaionWrapper = styled.div`
-  width: 200px;
-
   position: relaive;
 
   display: flex;

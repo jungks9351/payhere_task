@@ -8,11 +8,13 @@ import { serachRespository } from 'src/api/repository'
 import RepoItem from 'component/repository/RepoItem'
 import Pagination from 'component/common/Pagination'
 import Loading from 'component/common/Loading'
+import useLastPage from 'hooks/useLastPage'
 
 const RepoList = () => {
   const [searchParams] = useSearchParams()
   const [repoList, setRepoList] = useState<RepoType[]>([])
   const [loading, setLoading] = useState(false)
+  const isLastPage = useLastPage(repoList.length, 10)
 
   useEffect(() => {
     const fetchRepoList = async () => {
@@ -44,7 +46,7 @@ const RepoList = () => {
                 <RepoItem key={idx} repoItemData={repoItemData} />
               ))}
           </RespoListWrapper>
-          <Pagination />
+          <Pagination isLastPage={isLastPage} />
         </>
       ) : (
         <Loading />

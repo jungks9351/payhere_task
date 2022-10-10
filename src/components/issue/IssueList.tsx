@@ -8,12 +8,14 @@ import { getRepositoryIssues } from 'src/api/issue'
 
 import IssueItem from 'component/issue/IssueItem'
 import Loading from 'component/common/Loading'
+import useLastPage from 'hooks/useLastPage'
 
 const IssueList = () => {
   const [searchParams] = useSearchParams()
   const [issueListData, setIssueListData] = useState<IssueType[]>([])
   const [pageNum, setPageNum] = useState(1)
   const [loading, setLoading] = useState(false)
+  const isLastPage = useLastPage(issueListData.length, 10)
 
   const { pathname } = useLocation()
   const owner = pathname.split('/')[2]
@@ -51,7 +53,7 @@ const IssueList = () => {
               <IssueItem key={idx} issueData={issue} />
             ))}
           </IssueListWrapper>
-          <Pagination />
+          <Pagination isLastPage={isLastPage} />
         </>
       ) : (
         <Loading />
