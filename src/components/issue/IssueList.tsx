@@ -1,20 +1,23 @@
 import Pagination from 'component/common/Pagination'
 import { useEffect, useState } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { IssueType } from 'src/type'
+import { getRepositoryIssues } from 'src/api/issue'
 
-import styled from 'styled-components'
 import IssueItem from 'component/issue/IssueItem'
+import Loading from 'component/common/Loading'
 
 const IssueList = () => {
   const [searchParams] = useSearchParams()
   const [issueListData, setIssueListData] = useState<IssueType[]>([])
+  const [pageNum, setPageNum] = useState(1)
+  const [loading, setLoading] = useState(false)
+
   const { pathname } = useLocation()
   const owner = pathname.split('/')[2]
   const name = pathname.split('/')[3]
-
-  const [pageNum, setPageNum] = useState(1)
   const page = searchParams.get('page')
 
   useEffect(() => {
@@ -24,33 +27,35 @@ const IssueList = () => {
   }, [page])
 
   useEffect(() => {
-    const fetchRepoList = async () => {
-      const token = process.env.REACT_APP_GITHUB_TOKEN
-
-      const res = await fetch(
-        `https://api.github.com/repos/${owner}/${name}/issues?state=all&sort=desc&per_page=10&page=${pageNum}`,
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
-      const data = await res.json()
-      setIssueListData(data)
+    const fetchIssueList = async () => {
+      setLoading(true)
+      try {
+        const issueData = await getRepositoryIssues(owner, name, pageNum)
+        setLoading(false)
+        setIssueListData(issueData)
+      } catch (err) {
+        setLoading(true)
+        throw new Error('getRepositoryIssues API Error')
+      }
     }
-    fetchRepoList()
+    fetchIssueList()
   }, [owner, name, pageNum])
 
   return (
     <>
-      <IssueListTitle>{`${owner}/${name} Issue`}</IssueListTitle>
-      <IssueListWrapper>
-        {issueListData.map((issue, idx) => (
-          <IssueItem key={idx} issueData={issue} />
-        ))}
-      </IssueListWrapper>
-      <Pagination />
+      {!loading ? (
+        <>
+          <IssueListTitle>{`${owner}/${name} Issue`}</IssueListTitle>
+          <IssueListWrapper>
+            {issueListData.map((issue, idx) => (
+              <IssueItem key={idx} issueData={issue} />
+            ))}
+          </IssueListWrapper>
+          <Pagination />
+        </>
+      ) : (
+        <Loading />
+      )}
     </>
   )
 }
