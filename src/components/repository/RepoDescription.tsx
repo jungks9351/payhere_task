@@ -8,7 +8,7 @@ const RepoDescription = ({ children }: RepoDescriptionProps) => {
   return <RepoDescriptionWrapper>{children}</RepoDescriptionWrapper>
 }
 
-const RepoDescriptionWrapper = styled.p`
+const RepoDescriptionWrapper = styled.h4`
   width: 100%;
 
   margin-right: 16px;
