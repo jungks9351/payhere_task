@@ -4,11 +4,10 @@ import styled from 'styled-components'
 
 const Pagination = () => {
   const { pathname } = useLocation()
-  const owner = pathname.split('/')[2]
-  const name = pathname.split('/')[3]
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page')
+  const search = searchParams.get('q')
   const [pageNum, setPageNum] = useState(1)
 
   useEffect(() => {
@@ -22,18 +21,28 @@ const Pagination = () => {
       <PageNumsList>
         {pageNum !== 1 && (
           <PageNumItem>
-            <StyledLink to={`/repo/${owner}/${name}?page=${pageNum - 1}`}>
+            <StyledLink
+              to={`${pathname}?${search ? `q=${search}&` : ''}page=${
+                pageNum - 1
+              }`}
+            >
               Prev
             </StyledLink>
           </PageNumItem>
         )}
         <PageNumItem>
-          <StyledLink to={`/repo/${owner}/${name}?page=${pageNum}`}>
+          <StyledLink
+            to={`${pathname}?${search ? `q=${search}&` : ''}page=${pageNum}`}
+          >
             {pageNum}
           </StyledLink>
         </PageNumItem>
         <PageNumItem>
-          <StyledLink to={`/repo/${owner}/${name}?page=${pageNum + 1}`}>
+          <StyledLink
+            to={`${pathname}?${search ? `q=${search}&` : ''}page=${
+              pageNum + 1
+            }`}
+          >
             Next
           </StyledLink>
         </PageNumItem>
