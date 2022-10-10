@@ -1,46 +1,22 @@
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
-
-import { RepoType } from 'src/type'
-import { serachRespository } from 'src/api/repository'
 
 import RepoItem from 'component/repository/RepoItem'
 import Pagination from 'component/common/Pagination'
 import Loading from 'component/common/Loading'
 
 import usePagination from 'hooks/usePagination'
+import useRepoList from 'hooks/useRepoList'
 
 const RepoList = () => {
-  const [searchParams] = useSearchParams()
-  const [repoListData, setRepoListData] = useState<RepoType[]>([])
-  const [loading, setLoading] = useState(false)
-  const { isLastPage, pageNum } = usePagination(repoListData.length, 10)
+  const { loading, repoListData, search } = useRepoList()
 
-  useEffect(() => {
-    const fetchRepoList = async () => {
-      const q = searchParams.get('q')
-      setLoading(true)
-      try {
-        const searchData = await serachRespository(q, pageNum)
-        setLoading(false)
-        setRepoListData(searchData.items)
-      } catch (err) {
-        setLoading(true)
-        throw new Error('serachRespository API Error')
-      }
-    }
-
-    fetchRepoList()
-  }, [searchParams, pageNum])
+  const { isLastPage } = usePagination(repoListData.length, 10)
 
   return (
     <>
       {!loading ? (
         <>
-          <RespoListTitle>{`"${searchParams.get(
-            'q',
-          )}" 검색 결과`}</RespoListTitle>
+          <RespoListTitle>{`"${search}" 검색 결과`}</RespoListTitle>
           <RespoListWrapper>
             {repoListData &&
               repoListData.map((repoItemData, idx) => (
