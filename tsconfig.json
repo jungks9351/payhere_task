@@ -17,6 +17,7 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
+      "api/*": ["src/api/*"],
       "component/*": ["src/components/*"],
       "context/*": ["src/context/*"],
       "pages/*": ["src/pages/*"],
