@@ -9,9 +9,24 @@
 - Style : Styled-components
 - Formatting : Eslint, Prettier
 
+## 프로젝트 구조
+
+```
+├── public
+└── src
+    ├── api : api 관리
+    ├── components : 컴포넌트 관리
+    ├── context : Context api 관리
+    ├── hooks : 커스텀 훅 관리
+    ├── pages : 라우팅 페이지 관리
+    ├── styles : 스타일 관리
+    └── type.ts : 타입 관리
+    └── ...
+```
+
 ## 빌드 방법
 
-바탕화면에서 다음 명령어를 실행 시킵니다.
+터미널을 통해 바탕화면이나 원하는 위치로 설정 후 다음 명령어를 실행 시킵니다.
 
 ```
 git clone https://github.com/jungks9351/payhere_task.git
@@ -39,6 +54,15 @@ REACT_APP_GITHUB_TOKEN=[Github Token]
 ```
 npm start
 ```
+
+## Git Convention
+
+- chore : 프로젝트 환경 설정 및 수정
+- style : UI 구현 및 수정, 폴더 파일 구조 변경
+- feat : 기능 구현
+- refactor : 기능 리팩토링
+- remove : 사용하지 않는 코드 제거, console 제거
+- docs : 문서 작성 및 수정
 
 ## 사용 라이브러리
 
@@ -90,7 +114,7 @@ npm start
 
 ### 렌더링 최적화
 
-컴포넌트에서 필요한 데이터를 최소화하여 렌더링을 최적화 하기 위해 고민했습니다.
+컴포넌트에서 필요한 데이터를 최소화하고 메모이제이션하여 렌더링을 최적화 하기 위해 고민했습니다.
 
 ## 아쉬운 점
 
