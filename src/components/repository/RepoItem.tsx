@@ -42,10 +42,15 @@ const InfoWrapper = styled.div`
   flex-direction: column;
   gap: 10px;
 
-  padding: 8px;
+  padding: 20px 8px 8px 8px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
+    padding: 8px;
   }
 `
 
