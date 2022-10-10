@@ -9,9 +9,10 @@ const Footer = () => {
 }
 
 const FooterWrapper = styled.footer`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-weight: bold;
+  text-align: center;
+
+  padding: 30px 0;
 `
 
 export default Footer

@@ -3,17 +3,18 @@ import Layout from 'component/common/Layout'
 import Footer from 'component/common/Footer'
 import BookmarkContainer from 'component/bookmark/BookmarkContainer'
 import SearchContainer from 'component/search/SearchContainer'
+import Main from 'component/common/Main'
 
 const MainPage = () => {
   return (
-    <>
+    <Layout>
       <Header />
-      <Layout>
+      <Main>
         <SearchContainer />
         <BookmarkContainer />
-      </Layout>
+      </Main>
       <Footer />
-    </>
+    </Layout>
   )
 }
 

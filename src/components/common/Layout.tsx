@@ -6,8 +6,11 @@ const Layout = ({ children }: { children: ReactNode }) => {
 }
 
 const LayoutWrapper = styled.main`
+  height: 100%;
+
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `
 
 export default Layout

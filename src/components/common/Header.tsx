@@ -12,7 +12,6 @@ const Header = () => {
 }
 
 const HeaderWrapper = styled.header`
-  display: flex;
   padding: 30px;
 `
 

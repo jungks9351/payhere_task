@@ -3,18 +3,19 @@ import Layout from 'component/common/Layout'
 import Footer from 'component/common/Footer'
 import RepoContainer from 'component/repository/RepoContainer'
 import { BookmarkProvider } from 'context/BookmarkContext'
+import Main from 'component/common/Main'
 
 const RepoPage = () => {
   return (
-    <>
+    <Layout>
       <Header />
-      <Layout>
+      <Main>
         <BookmarkProvider>
           <RepoContainer />
         </BookmarkProvider>
-      </Layout>
+      </Main>
       <Footer />
-    </>
+    </Layout>
   )
 }
 
