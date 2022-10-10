@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <Link to="/">
-        <h1>PAYHER TASK</h1>
+        <h1>PAYHERE TASK</h1>
       </Link>
     </HeaderWrapper>
   )
