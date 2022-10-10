@@ -1,39 +1,16 @@
 import Pagination from 'component/common/Pagination'
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
-
-import { IssueType } from 'src/type'
-import { getRepositoryIssues } from 'src/api/issue'
 
 import IssueItem from 'component/issue/IssueItem'
 import Loading from 'component/common/Loading'
 
 import usePagination from 'hooks/usePagination'
+import useIssueList from 'hooks/useIssueList'
 
 const IssueList = () => {
-  const [issueListData, setIssueListData] = useState<IssueType[]>([])
-  const [loading, setLoading] = useState(false)
-  const { isLastPage, pageNum } = usePagination(issueListData.length, 10)
+  const { loading, issueListData, owner, name } = useIssueList()
 
-  const { pathname } = useLocation()
-  const owner = pathname.split('/')[2]
-  const name = pathname.split('/')[3]
-
-  useEffect(() => {
-    const fetchIssueList = async () => {
-      setLoading(true)
-      try {
-        const issueData = await getRepositoryIssues(owner, name, pageNum)
-        setLoading(false)
-        setIssueListData(issueData)
-      } catch (err) {
-        setLoading(true)
-        throw new Error('getRepositoryIssues API Error')
-      }
-    }
-    fetchIssueList()
-  }, [owner, name, pageNum])
+  const { isLastPage } = usePagination(issueListData.length, 10)
 
   return (
     <>
