@@ -20,7 +20,7 @@ const Pagination = () => {
     <PaginaionWrapper>
       <PageNumsList>
         {pageNum !== 1 && (
-          <PageNumItem>
+          <PrevLinkItem>
             <StyledLink
               to={`${pathname}?${search ? `q=${search}&` : ''}page=${
                 pageNum - 1
@@ -28,16 +28,10 @@ const Pagination = () => {
             >
               Prev
             </StyledLink>
-          </PageNumItem>
+          </PrevLinkItem>
         )}
-        <PageNumItem>
-          <StyledLink
-            to={`${pathname}?${search ? `q=${search}&` : ''}page=${pageNum}`}
-          >
-            {pageNum}
-          </StyledLink>
-        </PageNumItem>
-        <PageNumItem>
+        <PageNumItem>{pageNum}</PageNumItem>
+        <NextLinkItem>
           <StyledLink
             to={`${pathname}?${search ? `q=${search}&` : ''}page=${
               pageNum + 1
@@ -45,25 +39,48 @@ const Pagination = () => {
           >
             Next
           </StyledLink>
-        </PageNumItem>
+        </NextLinkItem>
       </PageNumsList>
     </PaginaionWrapper>
   )
 }
 
 const PaginaionWrapper = styled.div`
+  width: 200px;
+
+  position: relaive;
+
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
 const PageNumsList = styled.ul`
+  width: 100px;
+
+  position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
+
+  padding: 8px 0;
+
+  font-weight: bold;
 `
 
 const PageNumItem = styled.li`
   font-size: 16px;
+`
+const PrevLinkItem = styled(PageNumItem)`
+  position: absolute;
+  left: -20px;
+  top: 4px;
+`
+
+const NextLinkItem = styled(PageNumItem)`
+  position: absolute;
+  right: -20px;
+  top: 4px;
 `
 
 const StyledLink = styled(Link)`
