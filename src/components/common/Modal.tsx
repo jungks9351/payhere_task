@@ -32,14 +32,12 @@ const ModalOverlay = styled.div`
 
 const ModalContent = styled.div`
   width: 300px;
-  height: 300px;
+  height: 200px;
+  padding: 30px;
+
   background-color: #fff;
 
   border-radius: 20px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `
 
 export default Modal
