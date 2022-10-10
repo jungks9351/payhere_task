@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components'
 import useBookmarksDispatch from 'hooks/useBookmarksDispatch'
 
 import CustomButton from 'component/common/CustomButton'
+import BookmarkAlarm from './BookmarkAlarm'
+import useModal from 'hooks/useModal'
 
 type BookmarkType = {
   isBookmark: boolean
@@ -14,11 +16,13 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoType }) => {
   const dispatch = useBookmarksDispatch()
   const [isBookmark, setIsBookmark] = useState(false)
 
+  const { isVisible: Alarm, toggleModal: toggleAlaram } = useModal()
+
   const addBookmark = () => {
     const bookmarkData = JSON.parse(localStorage.getItem('bookmarks') || '[]')
 
     if (bookmarkData.length === 4 && !isBookmark) {
-      alert('북마크는 4개까지만 가능합니다.')
+      toggleAlaram()
       return
     }
 
@@ -63,16 +67,19 @@ const BookmarkButton = ({ repoItemData }: { repoItemData: RepoType }) => {
   }, [repoItemData.id, dispatch])
 
   return (
-    <ButtonWrapper isBookmark={isBookmark}>
-      <CustomButton
-        onClick={!isBookmark ? addBookmark : removeBookmark}
-        type="button"
-        title="bookmark button"
-        fontSize={14}
-      >
-        {!isBookmark ? '북마크' : '삭제'}
-      </CustomButton>
-    </ButtonWrapper>
+    <>
+      <ButtonWrapper isBookmark={isBookmark}>
+        <CustomButton
+          onClick={!isBookmark ? addBookmark : removeBookmark}
+          type="button"
+          title="bookmark button"
+          fontSize={14}
+        >
+          {!isBookmark ? '북마크' : '삭제'}
+        </CustomButton>
+      </ButtonWrapper>
+      {Alarm && <BookmarkAlarm toggleModal={toggleAlaram} />}
+    </>
   )
 }
 

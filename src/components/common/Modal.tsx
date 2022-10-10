@@ -1,15 +1,23 @@
-import { ReactNode } from 'react'
+import { MouseEventHandler, ReactNode } from 'react'
 import ReactDom from 'react-dom'
 import styled from 'styled-components'
 
 type ModalProps = {
   children: ReactNode
+  toggleModal: () => void
 }
 
-const Modal = ({ children }: ModalProps) => {
+const Modal = ({ children, toggleModal }: ModalProps) => {
   const modalRoot = document.getElementById('root')
+  const closeModal: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (e.currentTarget === e.target) {
+      toggleModal()
+      e.stopPropagation()
+    }
+  }
+
   return ReactDom.createPortal(
-    <ModalOverlay>
+    <ModalOverlay onClick={closeModal}>
       <ModalContent>{children}</ModalContent>
     </ModalOverlay>,
     modalRoot as HTMLElement,

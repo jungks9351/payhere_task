@@ -1,17 +1,24 @@
 import Modal from 'component/common/Modal'
 import CustomButton from 'component/common/CustomButton'
 import styled from 'styled-components'
-import { ReactNode } from 'react'
 
-const BookmarkAlarm = () => {
+type BookmarkAlarmProps = {
+  toggleModal: () => void
+}
+
+const BookmarkAlarm = ({ toggleModal }: BookmarkAlarmProps) => {
   return (
-    <Modal>
+    <Modal toggleModal={toggleModal}>
       <RepoAlarmWrapper>
-        <AlarmContent>
-          <p>북마크는 4개까지만 가능합니다.</p>
-        </AlarmContent>
+        <AlarmContent>북마크는 4개까지만 가능합니다.</AlarmContent>
         <ButtonWrapper>
-          <CustomButton type="button" title="알람" width={70} height={40}>
+          <CustomButton
+            onClick={toggleModal}
+            type="button"
+            title="알람"
+            width={70}
+            height={40}
+          >
             확인
           </CustomButton>
         </ButtonWrapper>
