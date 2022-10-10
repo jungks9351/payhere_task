@@ -94,15 +94,19 @@ npm start
 
 ## REST API
 
+URL Host [https://api.github.com](https://api.github.com/)
+
+Header { Authorization : GithubToken}
+
 <img width="500" alt="스크린샷 2022-10-11 오전 3 40 14" src="https://user-images.githubusercontent.com/81244738/194932428-fb8fed20-3cf0-4d17-89f0-af2615f16b59.png">
 
 ## 고민한 점
 
 ### UI/UX
 
-아토믹 디자인을 적용해 보고 싶었지만 디자인이 없어서 전체적인 측면부터 고려하여 Container 디자인 패턴과 Hook 패턴을 사용하였습니다.
+아토믹 디자인을 적용해 보고 싶었지만 시간이 없어서 전체적인 측면부터 고려하여 Container 디자인 패턴과 Hook 패턴을 사용하였습니다.
 
-반응형을 적용하기 위해서 상태로 관리 할지 미디어 쿼리로 관리할지 고민을 하였습니다. 우선 시간 내에 개발을 하기 위해서 미디어쿼리로 적용을 하였습니다.
+반응형을 적용하기 위해서 상태로 관리 할지 미디어 쿼리로 관리할지 고민을 하였습니다. 시간 내에 개발을 하기 위해서 미디어쿼리로 적용을 하였습니다.
 
 ### 북마크 상태 관리
 
@@ -115,6 +119,34 @@ npm start
 ### 렌더링 최적화
 
 컴포넌트에서 필요한 데이터를 최소화하고 메모이제이션하여 렌더링을 최적화 하기 위해 고민했습니다.
+
+## 기능 구현
+
+1. 검색
+
+- 검색 홈에서 검색창에 Repository명을 입력해서 Repository를 검색
+- 검색 결과 리스트에서 재검색 가능
+
+2. 북마크
+
+- 검색된 Public Repository를 등록
+- 등록 개수는 최대 4개로 제한하며, 최대 개수 초과 등록 시 이를 사용자에게 알람
+- LocalStorage 로컬 저장소를 활용
+- 검색 홈에서 등록된 Public Repository를 볼 수 있습니다.
+- 등록된 Repository를 삭제
+
+3. 북마크 상세페이지
+
+- 등록된 각각의 Public Repository의 issue를 한 페이지에서 렌더링
+- 각 issue 마다 제목, Repository 명, issue 상태 표시
+- Respository 명을 클릭하면 Github Repository 페이지로 이동
+- 해당 issue를 클릭하면 Github의 상세 페이지로 이동
+- 페이지네이션을 통해서 계속해서 issue를 렌더링
+
+4. 라우팅
+
+- 검색 홈, 검색 결과 페이지 구현
+- 헤더의 로고를 클릭시 검색 홈으로 이동
 
 ## 아쉬운 점
 
